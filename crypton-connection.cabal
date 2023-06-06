@@ -11,7 +11,7 @@ License:             BSD3
 License-file:        LICENSE
 Copyright:           Vincent Hanquez <vincent@snarc.org>
 Author:              Vincent Hanquez <vincent@snarc.org>
-Maintainer:          Vincent Hanquez <vincent@snarc.org>
+Maintainer:          Kazu Yamamoto <kazu@iij.ad.jp>
 Synopsis:            Simple and easy network connections API
 Build-Type:          Simple
 Category:            Network
