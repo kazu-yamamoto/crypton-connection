@@ -101,10 +101,16 @@ connectionSessionManager mvar = TLS.SessionManager
     { TLS.sessionResume     = \sessionID -> withMVar mvar (return . M.lookup sessionID)
     , TLS.sessionEstablish  = \sessionID sessionData ->
                                modifyMVar_ mvar (return . M.insert sessionID sessionData)
+#if MIN_VERSION_tls(2,0,0)
+       >> return Nothing
+#endif
     , TLS.sessionInvalidate = \sessionID -> modifyMVar_ mvar (return . M.delete sessionID)
 #if MIN_VERSION_tls(1,5,0)
     , TLS.sessionResumeOnlyOnce = \sessionID ->
          modifyMVar mvar (pure . swap . M.updateLookupWithKey (\_ _ -> Nothing) sessionID)
+#endif
+#if MIN_VERSION_tls(2,0,0)
+    , TLS.sessionUseTicket = False
 #endif
     }
 
