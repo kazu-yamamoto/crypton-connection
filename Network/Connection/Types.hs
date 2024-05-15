@@ -75,12 +75,15 @@ data TLSSettings
                                                            --   will always re-established their context.
                                                            --   Not Implemented Yet.
              , settingUseServerName                :: Bool -- ^ Use server name extension. Not Implemented Yet.
+             , settingClientSupported              :: Maybe TLS.Supported
+                                                           -- ^ Override defaults for the 'TLS.clientSupported'
+                                                           --   member of 'TLS.ClientParams'.
              } -- ^ Simple TLS settings. recommended to use.
     | TLSSettings TLS.ClientParams -- ^ full blown TLS Settings directly using TLS.Params. for power users.
     deriving (Show)
 
 instance Default TLSSettings where
-    def = TLSSettingsSimple False False False
+    def = TLSSettingsSimple False False False Nothing
 
 type ConnectionID = (HostName, PortNumber)
 
