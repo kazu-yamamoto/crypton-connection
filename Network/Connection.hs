@@ -57,7 +57,6 @@ import qualified Control.Exception as E
 import qualified System.IO.Error as E (mkIOError, eofErrorType)
 
 import qualified Network.TLS as TLS
-import qualified Network.TLS.Extra as TLS
 
 import System.X509 (getSystemCertificateStore)
 
@@ -123,10 +122,7 @@ initConnectionContext = ConnectionContext <$> getSystemCertificateStore
 makeTLSParams :: ConnectionContext -> ConnectionID -> TLSSettings -> TLS.ClientParams
 makeTLSParams cg cid ts@(TLSSettingsSimple {}) =
     (TLS.defaultParamsClient (fst cid) portString)
-        { TLS.clientSupported =
-            case settingClientSupported ts of
-              Nothing -> def { TLS.supportedCiphers = TLS.ciphersuite_default }
-              Just cs -> cs
+        { TLS.clientSupported = settingClientSupported ts
         , TLS.clientShared    = def
             { TLS.sharedCAStore         = globalCertificateStore cg
             , TLS.sharedValidationCache = validationCache

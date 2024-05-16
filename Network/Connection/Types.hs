@@ -18,6 +18,7 @@ import Data.ByteString (ByteString)
 
 import Network.Socket (PortNumber, Socket)
 import qualified Network.TLS as TLS
+import qualified Network.TLS.Extra as TLS
 
 import System.IO (Handle)
 
@@ -75,15 +76,15 @@ data TLSSettings
                                                            --   will always re-established their context.
                                                            --   Not Implemented Yet.
              , settingUseServerName                :: Bool -- ^ Use server name extension. Not Implemented Yet.
-             , settingClientSupported              :: Maybe TLS.Supported
-                                                           -- ^ Override defaults for the 'TLS.clientSupported'
+             , settingClientSupported              :: TLS.Supported
+                                                           -- ^ Used for the 'TLS.clientSupported'
                                                            --   member of 'TLS.ClientParams'.
              } -- ^ Simple TLS settings. recommended to use.
     | TLSSettings TLS.ClientParams -- ^ full blown TLS Settings directly using TLS.Params. for power users.
     deriving (Show)
 
 instance Default TLSSettings where
-    def = TLSSettingsSimple False False False Nothing
+    def = TLSSettingsSimple False False False def { TLS.supportedCiphers = TLS.ciphersuite_default }
 
 type ConnectionID = (HostName, PortNumber)
 
