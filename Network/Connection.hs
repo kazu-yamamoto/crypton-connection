@@ -96,7 +96,7 @@ instance E.Exception HostNotResolved
 instance E.Exception HostCannotConnect
 
 connectionSessionManager :: Manager -> TLS.SessionManager
-connectionSessionManager mvar = TLS.SessionManager
+connectionSessionManager mvar = TLS.noSessionManager
     { TLS.sessionResume     = \sessionID -> withMVar mvar (return . M.lookup sessionID)
     , TLS.sessionEstablish  = \sessionID sessionData ->
                                modifyMVar_ mvar (return . M.insert sessionID sessionData)
