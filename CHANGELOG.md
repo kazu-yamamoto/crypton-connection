@@ -1,3 +1,9 @@
+# CHANGELOG
+
+## Version 0.4.1
+
+* Preparing for tls v2.1
+
 ## Version 0.4.0
 
 * Add support for overriding the TLS clientSupported member in TLSSettingsSimple
