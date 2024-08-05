@@ -1,7 +1,7 @@
 Name:                crypton-connection
 Version:             0.4.1
 Description:
-    Simple network library for all your connection need.
+    Simple network library for all your connection needs.
     .
     Features: Really simple to use, SSL/TLS, SOCKS.
     .
@@ -12,7 +12,7 @@ License-file:        LICENSE
 Copyright:           Vincent Hanquez <vincent@snarc.org>
 Author:              Vincent Hanquez <vincent@snarc.org>
 Maintainer:          Kazu Yamamoto <kazu@iij.ad.jp>
-Synopsis:            Simple and easy network connections API
+Synopsis:            Simple and easy network connection API
 Build-Type:          Simple
 Category:            Network
 stability:           experimental
