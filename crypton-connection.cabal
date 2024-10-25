@@ -27,7 +27,7 @@ Library
                    , basement
                    , bytestring
                    , containers
-                   , data-default-class
+                   , data-default >= 0.8
                    , network >= 2.6.3
                    , tls >= 1.7 && < 2.2
                    , socks >= 0.6
