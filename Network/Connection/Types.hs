@@ -12,7 +12,7 @@ module Network.Connection.Types
 
 import Control.Concurrent.MVar (MVar)
 
-import Data.Default.Class
+import Data.Default
 import Data.X509.CertificateStore
 import Data.ByteString (ByteString)
 

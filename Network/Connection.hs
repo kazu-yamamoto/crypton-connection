@@ -65,7 +65,7 @@ import Network.Socket
 import qualified Network.Socket.ByteString as N
 
 import Data.Tuple (swap)
-import Data.Default.Class
+import Data.Default
 import Data.Data
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as B
