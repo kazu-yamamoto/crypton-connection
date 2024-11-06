@@ -6,15 +6,14 @@
 -- Portability : portable
 --
 -- connection types
---
 module Network.Connection.Types
-    where
+where
 
 import Control.Concurrent.MVar (MVar)
 
+import Data.ByteString (ByteString)
 import Data.Default
 import Data.X509.CertificateStore
-import Data.ByteString (ByteString)
 
 import Network.Socket (PortNumber, Socket)
 import qualified Network.TLS as TLS
@@ -23,10 +22,10 @@ import qualified Network.TLS.Extra as TLS
 import System.IO (Handle)
 
 -- | Simple backend enumeration, either using a raw connection or a tls connection.
-data ConnectionBackend = ConnectionStream Handle
-                       | ConnectionSocket Socket
-                       | ConnectionTLS TLS.Context
-
+data ConnectionBackend
+    = ConnectionStream Handle
+    | ConnectionSocket Socket
+    | ConnectionTLS TLS.Context
 
 -- | Hostname This could either be a name string (punycode encoded) or an ipv4/ipv6
 type HostName = String
@@ -41,10 +40,14 @@ type HostName = String
 -- If you need to connect through a SOCKS, you should make sure
 -- connectionUseSocks is correctly set.
 data ConnectionParams = ConnectionParams
-    { connectionHostname   :: HostName           -- ^ host name to connect to.
-    , connectionPort       :: PortNumber         -- ^ port number to connect to.
-    , connectionUseSecure  :: Maybe TLSSettings  -- ^ optional TLS parameters.
-    , connectionUseSocks   :: Maybe ProxySettings -- ^ optional Proxy/Socks configuration.
+    { connectionHostname :: HostName
+    -- ^ host name to connect to.
+    , connectionPort :: PortNumber
+    -- ^ port number to connect to.
+    , connectionUseSecure :: Maybe TLSSettings
+    -- ^ optional TLS parameters.
+    , connectionUseSocks :: Maybe ProxySettings
+    -- ^ optional Proxy/Socks configuration.
     }
 
 -- | Proxy settings for the connection.
@@ -55,8 +58,8 @@ data ConnectionParams = ConnectionParams
 --
 -- That's for now the only settings in the SOCKS package,
 -- socks password, or any sort of other authentications is not yet implemented.
-data ProxySettings =
-      SockSettingsSimple HostName PortNumber
+data ProxySettings
+    = SockSettingsSimple HostName PortNumber
     | SockSettingsEnvironment (Maybe String)
     | OtherProxy HostName PortNumber
 
@@ -69,30 +72,43 @@ type SockSettings = ProxySettings
 -- simple settings, you should use TLSSettingsSimple.
 data TLSSettings
     = TLSSettingsSimple
-             { settingDisableCertificateValidation :: Bool -- ^ Disable certificate verification completely,
-                                                           --   this make TLS/SSL vulnerable to a MITM attack.
-                                                           --   not recommended to use, but for testing.
-             , settingDisableSession               :: Bool -- ^ Disable session management. TLS/SSL connections
-                                                           --   will always re-established their context.
-                                                           --   Not Implemented Yet.
-             , settingUseServerName                :: Bool -- ^ Use server name extension. Not Implemented Yet.
-             , settingClientSupported              :: TLS.Supported
-                                                           -- ^ Used for the 'TLS.clientSupported'
-                                                           --   member of 'TLS.ClientParams'.
-             } -- ^ Simple TLS settings. recommended to use.
-    | TLSSettings TLS.ClientParams -- ^ full blown TLS Settings directly using TLS.Params. for power users.
+        { settingDisableCertificateValidation :: Bool
+        -- ^ Disable certificate verification completely,
+        --   this make TLS/SSL vulnerable to a MITM attack.
+        --   not recommended to use, but for testing.
+        , settingDisableSession :: Bool
+        -- ^ Disable session management. TLS/SSL connections
+        --   will always re-established their context.
+        --   Not Implemented Yet.
+        , settingUseServerName :: Bool
+        -- ^ Use server name extension. Not Implemented Yet.
+        , settingClientSupported :: TLS.Supported
+        -- ^ Used for the 'TLS.clientSupported'
+        --   member of 'TLS.ClientParams'.
+        }
+    | -- \^ Simple TLS settings. recommended to use.
+
+      -- | full blown TLS Settings directly using TLS.Params. for power users.
+      TLSSettings TLS.ClientParams
     deriving (Show)
 
 instance Default TLSSettings where
-    def = TLSSettingsSimple False False False def { TLS.supportedCiphers = TLS.ciphersuite_default }
+    def =
+        TLSSettingsSimple
+            False
+            False
+            False
+            def{TLS.supportedCiphers = TLS.ciphersuite_default}
 
 type ConnectionID = (HostName, PortNumber)
 
 -- | This opaque type represent a connection to a destination.
 data Connection = Connection
     { connectionBackend :: MVar ConnectionBackend
-    , connectionBuffer  :: MVar (Maybe ByteString) -- ^ this is set to 'Nothing' on EOF
-    , connectionID      :: ConnectionID  -- ^ return a simple tuple of the port and hostname that we're connected to.
+    , connectionBuffer :: MVar (Maybe ByteString)
+    -- ^ this is set to 'Nothing' on EOF
+    , connectionID :: ConnectionID
+    -- ^ return a simple tuple of the port and hostname that we're connected to.
     }
 
 -- | Shared values (certificate store, sessions, ..) between connections

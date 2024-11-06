@@ -1,18 +1,21 @@
 {-# LANGUAGE OverloadedStrings #-}
+
 import qualified Data.ByteString as B
 import Data.ByteString.Char8 ()
-import Network.Connection
 import Data.Default
+import Network.Connection
 
 main = do
     ctx <- initConnectionContext
-    con <- connectTo ctx $ ConnectionParams
-                              { connectionHostname  = "www.example.com"
-                              , connectionPort      = 4567
-                              , connectionUseSecure = Nothing
-                              , connectionUseSocks  = Nothing
-                              }
-    -- talk to the other side, says hello and starttls 
+    con <-
+        connectTo ctx $
+            ConnectionParams
+                { connectionHostname = "www.example.com"
+                , connectionPort = 4567
+                , connectionUseSecure = Nothing
+                , connectionUseSocks = Nothing
+                }
+    -- talk to the other side, says hello and starttls
     connectionPut con "HELLO\n"
     connectionPut con "STARTTLS\n"
 
