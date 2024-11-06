@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.4.2
+
+* Using data-default.
+
 ## Version 0.4.1
 
 * Preparing for tls v2.1
