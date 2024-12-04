@@ -36,6 +36,7 @@ Library
                    , crypton-x509-system >= 1.5
                    , crypton-x509-validation >= 1.5
   Exposed-modules:   Network.Connection
+                     Network.Connection.Internal
   Other-modules:     Network.Connection.Types
   ghc-options:       -Wall
 
