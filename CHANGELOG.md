@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 0.4.3
+
+* Creating the `Internal` module and export the `ConnectionContext` constructor.
+  [#7](https://github.com/kazu-yamamoto/crypton-connection/pull/7)
+
 ## Version 0.4.2
 
 * Using data-default.
