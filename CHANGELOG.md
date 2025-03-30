@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 0.4.4
+
+* Remove unused packages.
+  [#8](https://github.com/kazu-yamamoto/crypton-connection/pull/8)
+
 ## Version 0.4.3
 
 * Creating the `Internal` module and export the `ConnectionContext` constructor.
