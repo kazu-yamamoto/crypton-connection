@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.4.5
+
+* Swap `crypton-socks` for unmaintained `socks` dependency.
+
 ## Version 0.4.4
 
 * Remove unused packages.
@@ -30,4 +34,3 @@
 ## Version 0.3.1
 
 * The first release to support crypton.
-
