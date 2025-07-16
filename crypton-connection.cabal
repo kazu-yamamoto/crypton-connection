@@ -1,5 +1,5 @@
 Name:                crypton-connection
-Version:             0.4.4
+Version:             0.4.5
 Description:
     Simple network library for all your connection needs.
     .
@@ -29,7 +29,7 @@ Library
                    , data-default
                    , network >= 2.6.3
                    , tls >= 1.7 && < 2.2
-                   , socks >= 0.6
+                   , crypton-socks >= 0.6
                    , crypton-x509-store >= 1.5
                    , crypton-x509-system >= 1.5
   Exposed-modules:   Network.Connection
