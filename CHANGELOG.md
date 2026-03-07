@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.4.6
+
+* Using tls v2.3 and crypton-x509* v1.9.
+
 ## Version 0.4.5
 
 * Swap `crypton-socks` for unmaintained `socks` dependency.
