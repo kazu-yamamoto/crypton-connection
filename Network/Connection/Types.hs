@@ -85,6 +85,8 @@ data TLSSettings
         , settingClientSupported :: TLS.Supported
         -- ^ Used for the 'TLS.clientSupported'
         --   member of 'TLS.ClientParams'.
+        --
+        -- @since 0.4.0
         }
     | -- \^ Simple TLS settings. recommended to use.
 
