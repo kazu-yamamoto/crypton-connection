@@ -30,8 +30,8 @@ Library
                    , network >= 2.6.3
                    , tls >= 2.3.0 && < 2.5
                    , crypton-socks >= 0.6
-                   , crypton-x509-store >= 1.9.0 && <1.10
-                   , crypton-x509-system >= 1.9.0 && <1.10
+                   , crypton-x509-store >= 1.10.0 && <1.11
+                   , crypton-x509-system >= 1.10.0 && <1.11
   Exposed-modules:   Network.Connection
                      Network.Connection.Internal
   Other-modules:     Network.Connection.Types
